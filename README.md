@@ -4,9 +4,9 @@
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| nickname           | string | null: false, unique: true|
+| nickname           | string | null: false,|
 | email              | string | null: false, unique: true|
-| encrypted_password | string | null: false, unique: true|
+| encrypted_password | string | null: false,|
 | last_name          | string | null: false |
 | first_name         | string | null: false |
 | last_name_kana     | string | null: false |
@@ -28,9 +28,8 @@ has_many :orders
 | item_status_id   | integer     | null: false |
 | shipping_cost_id | integer     | null: false |
 | delivery_area_id | integer     | null: false |
-| shipping_date_id | string      | null: false |
+| shipping_date_id | integer     | null: false |
 | price            | integer     | null: false |
-| name             | integer     | null: false |
 
 Association
 belongs_to :user
@@ -42,7 +41,6 @@ has_one :order
 | ------       | ---------- | ------------------------------ |
 | user         | references | null: false, foreign_key: true |
 | item         | references | null: false, foreign_key: true |
-| card_number  |string      | null: false, |
 
 Association
 belongs_to :user
@@ -53,9 +51,9 @@ has_one :payment
 
 | Column         | Type       | Options                        |
 | -------        | ---------- | ------------------------------ |
-| orders         | references | null: false, foreign_key: true |
+| order          | references | null: false, foreign_key: true |
 | postcode       | string     | null: false, |
-| prefecture     | integer    | null: false, |
+| delivery_area_id      | integer    | null: false, |
 | city           | string     | null: false, |
 | adress         | string     | null: false, |
 | buildiing_name | string     | 
