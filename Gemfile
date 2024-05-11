@@ -69,6 +69,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'rspec-rails', '~> 4.0.0'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do
@@ -78,3 +81,5 @@ end
 group :production do
   gem 'pg'
 end
+
+gem 'devise'
