@@ -9,6 +9,6 @@ FactoryBot.define do
     first_name { '裕章' }
     last_name_kana { 'イチムラ' }
     first_name_kana { 'ヒロアキ' }
-    birthday { Faker::Date.birthday}
+    birthday { Faker::Date.birthday }
   end
 end
