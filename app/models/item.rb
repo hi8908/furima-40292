@@ -1,9 +1,21 @@
 class Item < ApplicationRecord
+  # テーブルとのアソシエーション
   belongs_to :user
+
+  # アクティブハッシュとのアソシエーション
+  belongs_to :category
+  belongs_to :delivery_area
+  belongs_to :item_status
+  belongs_to :shipping_cost
+  belongs_to :shipping_date
+
+ 
 
   # active_storageとのアソシエーション
   # （items・active_storage_blobsテーブルを関連付け）
   has_one_attached :image
+
+
 
   with_options presence: true do
     validates :user_id
