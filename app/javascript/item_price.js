@@ -1,4 +1,4 @@
-window.addEventListener('load', () => {
+const pay = () => {
   const priceInput = document.getElementById("item-price");
   const addTaxDom = document.getElementById("add-tax-price");
   const profitDom = document.getElementById("profit");
@@ -33,4 +33,7 @@ window.addEventListener('load', () => {
   } else {
     console.error("必要なDOM要素が見つかりません");
   }
-});
+};
+
+window.addEventListener("turbo:load", pay);
+window.addEventListener("turbo:render", pay);
