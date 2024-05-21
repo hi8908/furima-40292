@@ -1,9 +1,10 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: :index
+  # 重複処理をまとめる
+  before_action :set_item, only: :show
 
   def index
     @items = Item.all.order('created_at DESC')
-    # @items = Item.includes(:user).order('created_at DESC')
   end
 
   def new
@@ -19,10 +20,16 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   private
 
   def item_params
     params.require(:item).permit(:image, :name, :description, :category_id, :item_status_id, :shipping_cost_id,
                                  :delivery_area_id, :shipping_date_id, :price).merge(user_id: current_user.id)
+  end
+  def set_item
+   @item = Item.find(params[:id])
   end
 end
