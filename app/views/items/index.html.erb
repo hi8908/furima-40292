@@ -131,7 +131,7 @@
       <%# 商品データがある場合は、eachメソッドで一覧表示する %>
       <% @items.each do |item| %>
         <li class='list'>
-          <%= link_to "#" do %>
+          <%= link_to item_path(item) do %>
           <div class='item-img-content'>
             <%= image_tag item.image, class: "item-img" %>
 
@@ -155,7 +155,7 @@
             </div>
           </div>
           <% end %>
-        </li>
+         </li>
       <% end %>
        
      <%# 商品がない場合はダミーを表示する %>
