@@ -17,8 +17,8 @@
       <span class="item-price">
        ¥ <%= @item.price %>
       </span>
-        <%= @item.shipping_cost.name %>
-        <%= "配送料負担" %>
+      <span class="item-postage">
+         <%= @item.shipping_cost.name %>
       </span>
     </div>
 
@@ -27,9 +27,9 @@
      <%# 商品の編集・削除ができるのは、本人のみ %>
      <% if current_user.id == @item.user_id %>
        <% unless @item.sold_out? %>
-          <%= link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
+          <%= link_to "商品の編集", '#', method: :get, class: "item-red-btn" %>
           <p class="or-text">or</p>
-          <%= link_to "削除", item_path(@item), data: { turbo_method: :delete }, class: "item-destroy" %>
+          <%= link_to "削除", '#' data: { turbo_method: :delete }, class: "item-destroy" %>
          <% end %>
        <% else %>
         <% unless @item.sold_out? %>
@@ -104,9 +104,8 @@
       後ろの商品 ＞
     </a>
   </div>
-  <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
   <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
-  <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
+  
 </div>
 
 <%= render "shared/footer" %>
