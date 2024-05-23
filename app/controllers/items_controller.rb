@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
 
   def show
   end
-  
+
   # ログインしているユーザーと同じならばばeditファイルが読み込まれる
   def edit
     redirect_to root_path unless @item.user_id == current_user.id
@@ -35,7 +35,7 @@ class ItemsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
-  
+
   private
 
   def item_params
