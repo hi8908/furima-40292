@@ -38,4 +38,7 @@ class Item < ApplicationRecord
     validates :shipping_cost_id
     validates :shipping_date_id
   end
+
+  def sold_out?
+  end
 end
