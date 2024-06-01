@@ -1,6 +1,5 @@
 class Order < ApplicationRecord
-
-belongs_to :user
-belongs_to :item
-has_one :payment
+  belongs_to :user
+  belongs_to :item
+  has_one :payment
 end

@@ -64,7 +64,7 @@ RSpec.describe OrdersPayments, type: :model do
       it '都道府県が「---」だと保存できないこと' do
         @orders_payments.prefecture_id = 1
         @orders_payments.valid?
-        expect(@orders_payments.errors.full_messages).to include("Prefecture must be other than 1")
+        expect(@orders_payments.errors.full_messages).to include('Prefecture must be other than 1')
       end
       it '都道府県が空だと保存できないこと' do
         @orders_payments.prefecture_id = nil
