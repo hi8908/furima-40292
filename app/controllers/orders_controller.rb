@@ -3,13 +3,13 @@ class OrdersController < ApplicationController
   before_action :set_item
 
   def index
-    @order_form = OrdersPayments.new
+    @orders_payments = OrdersPayments.new
   end
 
   def create
-    @order_form = OrdersPayments.new(order_params)
-    if @order_form.valid?
-      @order_form.save
+    @orders_payments = OrdersPayments.new(order_params)
+    if @orders_payments.valid?
+      @orders_payments.save
       redirect_to root_path
     else
       render :index
