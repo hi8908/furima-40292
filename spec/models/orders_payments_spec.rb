@@ -30,27 +30,27 @@ RSpec.describe OrdersPayments, type: :model do
       it '郵便番号が空だと保存できないこと' do
         @orders_payments.postcode = nil
         @orders_payments.valid?
-        expect(@orders_payments.errors.full_messages).to include("Postal code can't be blank", 'Postal code is invalid')
+        expect(@orders_payments.errors.full_messages).to include("Postcode can't be blank")
       end
       it '郵便番号にハイフンがないと保存できないこと' do
         @orders_payments.postcode = '1234567'
         @orders_payments.valid?
-        expect(@orders_payments.errors.full_messages).to include('Postal code is invalid')
+        expect(@orders_payments.errors.full_messages).to include('Postcode is invalid')
       end
       it '郵便番号に全角文字が含まれていると保存できないこと' do
-        @orders_payments.postal_code = '１２３-４５６７'
+        @orders_payments.postcode = '１２３-４５６７'
         @orders_payments.valid?
-        expect(@orders_payments.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
+        expect(@orders_payments.errors.full_messages).to include('Postcode is invalid')
       end
       it '都道府県が「---」だと保存できないこと' do
-        @orders_payments.prefecture_id = 1
+        @orders_payments.delivery_area_id= 1
         @orders_payments.valid?
-        expect(@orders_payments.errors.full_messages).to include('Prefecture must be other than 1')
+        expect(@orders_payments.errors.full_messages).to include('Delivery area must be other than 1')
       end
       it '都道府県が空だと保存できないこと' do
-        @orders_payments.prefecture_id = nil
+        @orders_payments.delivery_area_id = nil
         @orders_payments.valid?
-        expect(@orders_payments.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@orders_payments.errors.full_messages).to include("Delivery area can't be blank")
       end
       it '市区町村が空だと保存できないこと' do
         @orders_payments.city = nil
@@ -78,9 +78,9 @@ RSpec.describe OrdersPayments, type: :model do
         expect(@orders_payments.errors.full_messages).to include('Phone number is invalid')
       end
       it 'トークンが空だと保存できないこと' do
-        @order_form.token = nil
-        @order_form.valid?
-        expect(@order_form.errors.full_messages).to include("Token can't be blank")
+        @orders_payments.token = nil
+        @orders_payments.valid?
+        expect( @orders_payments.errors.full_messages).to include("Token can't be blank")
     end
   end 
   end

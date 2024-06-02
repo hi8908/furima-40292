@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item
-  
+  before_action :redirect_if_sold_or_owner, only: [:index]
 
   def index
     @orders_payments = OrdersPayments.new
@@ -25,8 +25,8 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:orders_payments).permit( :postcode, :delivery_area_id, :city, :address, :building, :phone_number).merge(
-     token: params[:token] ,user_id: current_user.id, item_id: @item.id
+    params.require(:orders_payments).permit(:postcode, :delivery_area_id, :city, :address, :building, :phone_number).merge(
+      token: params[:token], user_id: current_user.id, item_id: @item.id
     )
   end
 
@@ -37,5 +37,11 @@ class OrdersController < ApplicationController
       card: order_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def redirect_if_sold_or_owner
+    if @item.order.present? || @item.user_id == current_user.id
+      redirect_to root_path
+    end
   end
 end
