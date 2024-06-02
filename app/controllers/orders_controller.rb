@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item
-  before_action :non_purchased_item, only: [:index, :create]
+  
 
   def index
     @orders_payments = OrdersPayments.new

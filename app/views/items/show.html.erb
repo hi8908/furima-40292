@@ -9,8 +9,8 @@
     <div class="item-img-content">
       <%= image_tag @item.image, class: "item-box-img" if @item.image.attached? %>
       <%# 商品が売れている場合は、sold outを表示する %>
-      <% if @item.sold_out? %>
-       <% <div class='sold-out'>
+      <% if @item.order != nil%>
+       <<div class='sold-out'>
         <span>Sold Out!!</span>
       </div> 
     <% end %>
@@ -25,7 +25,7 @@
     </div>
 
    <%# 新規登録済み かつ 商品の出品者 かつ 未購入の商品の場合のみ編集できる %> 
-    <% if user_signed_in? && current_user.id == @item.user_id %> 
+   <% if user_signed_in? && current_user.id == @item.user_id && @item.nil? %> 
      <% unless @item.sold_out? %>
      <%= link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
      <p class="or-text">or</p>
