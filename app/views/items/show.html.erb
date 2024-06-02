@@ -8,10 +8,12 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @item.image, class: "item-box-img" if @item.image.attached? %>
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
-      <%# <div class='sold-out'>
+      <%# 商品が売れている場合は、sold outを表示する %>
+      <% if @item.sold_out? %>
+       <% <div class='sold-out'>
         <span>Sold Out!!</span>
-      </div> %>
+      </div> 
+    <% end %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -22,21 +24,20 @@
       </span>
     </div>
 
-    <%# 新規登録していない人でも詳細画面を見られるが以下のボタンは登録者のみ %>
-    <% if user_signed_in? %>
-     <%# 商品の編集・削除ができるのは、本人のみ %>
-     <% if current_user.id == @item.user_id %>
-       <% unless @item.sold_out? %>
-          <%= link_to "商品の編集", edit_item_path(@item),method: :get, class: "item-red-btn" %>
-          <p class="or-text">or</p>
-          <%= link_to "削除", item_path(@item), data: { turbo_method: :delete }, class: "item-destroy" %>
-         <% end %>
-       <% else %>
-        <% unless @item.sold_out? %>
-          <%= link_to "購入画面に進む", item_orders_path(@item), data: { turbo: false }, class:"item-red-btn"%>
-        <% end %>
-      <% end %>
-   <% end %>
+   <%# 新規登録済み かつ 商品の出品者 かつ 未購入の商品の場合のみ編集できる %> 
+    <% if user_signed_in? && current_user.id == @item.user_id %> 
+     <% unless @item.sold_out? %>
+     <%= link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
+     <p class="or-text">or</p>
+     <%= link_to "削除", item_path(@item), data: { turbo_method: :delete }, class: "item-destroy" %>
+    <% end %>
+    <% elsif user_signed_in? && @item.order.blank? %> 
+    <%# 新規登録済み かつ 商品の出品者ではない かつ 未購入商品の場合 %>
+    <%= link_to "購入画面に進む", item_orders_path(@item), data: { turbo: false }, class: "item-red-btn" %>
+ <% end %>
+
+
+
 
     <div class="item-explain-box">
       <span><%= @item.description %></span>

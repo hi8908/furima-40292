@@ -9,7 +9,11 @@ RSpec.describe OrdersPayments, type: :model do
     context '配送先情報の保存ができるとき' do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@orders_payments).to be_valid
-      end#建物名が空でも問題ない
+      end
+      it '建物名が空でも保存できること' do
+        @orders_payments.building = ''
+        expect(@orders_payments).to be_valid
+      end
     end
 
     context '配送先情報の保存ができないとき' do
@@ -32,6 +36,11 @@ RSpec.describe OrdersPayments, type: :model do
         @orders_payments.postcode = '1234567'
         @orders_payments.valid?
         expect(@orders_payments.errors.full_messages).to include('Postal code is invalid')
+      end
+      it '郵便番号に全角文字が含まれていると保存できないこと' do
+        @orders_payments.postal_code = '１２３-４５６７'
+        @orders_payments.valid?
+        expect(@orders_payments.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       it '都道府県が「---」だと保存できないこと' do
         @orders_payments.prefecture_id = 1
@@ -68,6 +77,11 @@ RSpec.describe OrdersPayments, type: :model do
         @orders_payments.valid?
         expect(@orders_payments.errors.full_messages).to include('Phone number is invalid')
       end
+      it 'トークンが空だと保存できないこと' do
+        @order_form.token = nil
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Token can't be blank")
     end
+  end 
   end
 end
