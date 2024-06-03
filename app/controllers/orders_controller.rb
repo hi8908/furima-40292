@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   before_action :redirect_if_sold_or_owner, only: [:index]
 
   def index
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @orders_payments = OrdersPayments.new
   end
 

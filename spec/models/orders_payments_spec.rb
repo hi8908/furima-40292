@@ -80,7 +80,7 @@ RSpec.describe OrdersPayments, type: :model do
       it 'トークンが空だと保存できないこと' do
         @orders_payments.token = nil
         @orders_payments.valid?
-        expect( @orders_payments.errors.full_messages).to include("Token can't be blank")
+        expect(@orders_payments.errors.full_messages).to include("Token can't be blank")
     end
   end 
   end
