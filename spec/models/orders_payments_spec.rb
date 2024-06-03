@@ -77,6 +77,11 @@ RSpec.describe OrdersPayments, type: :model do
         @orders_payments.valid?
         expect(@orders_payments.errors.full_messages).to include('Phone number is invalid')
       end
+      it '電話番号が9桁以下では保存できないこと' do
+        @orders_payments.phone_number = '090123456'
+        @orders_payments.valid?
+        expect(@orders_payments.errors.full_messages).to include('Phone number is invalid')
+      end
       it 'トークンが空だと保存できないこと' do
         @orders_payments.token = nil
         @orders_payments.valid?
