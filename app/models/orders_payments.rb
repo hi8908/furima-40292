@@ -19,6 +19,6 @@ class OrdersPayments
     order = Order.create(item_id:, user_id:)
     # 配送先情報を保存
     Payment.create(postcode:, delivery_area_id:, city:, address:,
-                           building:, phone_number:, order_id: order.id)
+                   building:, phone_number:, order_id: order.id)
   end
 end

@@ -43,7 +43,7 @@ RSpec.describe OrdersPayments, type: :model do
         expect(@orders_payments.errors.full_messages).to include('Postcode is invalid')
       end
       it '都道府県が「---」だと保存できないこと' do
-        @orders_payments.delivery_area_id= 1
+        @orders_payments.delivery_area_id = 1
         @orders_payments.valid?
         expect(@orders_payments.errors.full_messages).to include('Delivery area must be other than 1')
       end
@@ -81,7 +81,7 @@ RSpec.describe OrdersPayments, type: :model do
         @orders_payments.token = nil
         @orders_payments.valid?
         expect(@orders_payments.errors.full_messages).to include("Token can't be blank")
+      end
     end
-  end 
   end
 end
