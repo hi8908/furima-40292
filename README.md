@@ -55,8 +55,8 @@ has_one :payment
 | postcode       | string     | null: false, |
 | delivery_area_id      | integer    | null: false, |
 | city           | string     | null: false, |
-| adress         | string     | null: false, |
-| buildiing_name | string     | 
+| address         | string     | null: false, |
+| building_name | string     | 
 | phone_number   | string     | null: false, |
 
 Association

@@ -25,7 +25,9 @@ class ItemsController < ApplicationController
 
   # ログインしているユーザーと同じならばばeditファイルが読み込まれる
   def edit
-    redirect_to root_path unless @item.user_id == current_user.id
+    return unless @item.user_id != current_user.id || @item.order.present?
+
+    redirect_to root_path
   end
 
   def update
